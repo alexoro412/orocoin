@@ -18,12 +18,16 @@ it may be necessary to edit other email settings(which are defined in nearby lin
 
 orocoin will use this email account to notify people of receiving funds, receipts for prints, notify the printer's email account of a new print, etc...
 
+then run
+```
+cd vend
+python manage.py migrate # to initialise the database
+python populate.py # to create some example users, jobs, and products
+```
+
 ---
 ## running
 ```
-cd vend
-python manage.py migrate
-python populate.py # to create some example users, jobs, and products
 python manage.py runserver
 ```
 now goto localhost:8000/credits
