@@ -1,7 +1,9 @@
 import datetime
 import subprocess
 import uuid
+import os
 
+from django.conf import settings
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
@@ -13,6 +15,8 @@ import credits.models
 from credits.forms import UserProfileForm, UserForm, SpendForm, StlForm, transForm, SubmissionForm, JobForm, AcceptForm
 from credits.models import PendingTransactions, Purchase, Design, Job, Submission, AddTransaction
 
+
+email_address = settings.EMAIL_HOST_USER
 
 # TODO add job monitoring interface
 # Needs --
@@ -202,7 +206,7 @@ def order(request):
         send_mail(
             'Ordered model - ' + design.title + ' - ' + design.owner.username + ' - ' + str(datetime.datetime.now()),
             design.owner.username + ' just order http://127.0.0.1:8000' + design.stl.url + ' so print it! code: ' + design.name + ' (hunter, if you\'re reading this, that link won\'t work, don\'t try it. it will work once I fully set up the credits site at oro.kentdenver.org)',
-            'zyacir@gmail.com', ['3d@kentdenver.org'])
+            email_address, ['3d@kentdenver.org'])
         return HttpResponse('Model ordered succesfully')
     return HttpResponse('Could not order model -- Not enough money')
 
@@ -245,7 +249,7 @@ def transfer(request):
             rec.save()
             send_mail('Transferred funds',
                       'you just received money from ' + request.user.username + ' . How kind of them. they gave you ' + str(
-                          da.cost) + ' Orocoins. yay!!!!!!!!!!', 'zyacir@gmail.com', [da.recipient.email])
+                          da.cost) + ' Orocoins. yay!!!!!!!!!!', email_address, [da.recipient.email])
             return HttpResponseRedirect('/credits/')
         else:
             return HttpResponse('Failed to transfer funds')
@@ -355,7 +359,7 @@ def wallet(request):
 #########################
 
 def stlCost(stl):
-    admesh_output = subprocess.Popen(["/Users/alexoro/django/vend/credits/vol", stl.stl.path],stdout=subprocess.PIPE).communicate()[0]
+    admesh_output = subprocess.Popen([os.path.join(settings.BASE_DIR, "credits", "vol"), stl.stl.path],stdout=subprocess.PIPE).communicate()[0]
     volume = float(admesh_output.split()[7])
     surface_area = parseSTL(stl.stl.path)
     if surface_area == -1:

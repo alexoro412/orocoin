@@ -23,8 +23,10 @@ SECRET_KEY = 'bgwb#vjegp3s*r8n_mez%4z!bl*74v!7p*8yq)zdfbxuh0bm5f'
 DEBUG = True
 
 TEMPLATE_DEBUG = True
-TEMPLATE_DIRS = ('/Users/alexoro/django/vend/templates/',)
-
+TEMPLATE_PATH = os.path.join(BASE_DIR, 'templates')
+TEMPLATE_DIRS = (
+	TEMPLATE_PATH,
+)
 ALLOWED_HOSTS = []
 
 
