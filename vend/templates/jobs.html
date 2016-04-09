@@ -1,0 +1,41 @@
+<div class="col-lg-6">
+<div class="bs-component">
+<div class="panel panel-primary">
+<div class="panel-heading">
+  <h3 class="panel-title">Jobs</h3>
+</div>
+<div class="panel-body">
+              <div class="list-group">
+{% for job in jobs %}
+<div class="list-group-item">
+<div class="row-action-primary">
+  {% if job.owner == user %}
+  <a href="/credits/monitor/?id={{ job.name }}" class="btn btn-primary btn-fab mdi-device-dvr"></a>
+  {% else %}
+  <i class="mdi-action-assignment"></i>
+  {% endif %}
+                                        <!-- <i class="mdi-action-assignment"></i> -->
+                                    </div>
+<div class="row-content">
+                                        <div class="least-content">
+
+                                        <a href="javascript:loadForm('/credits/newsubmission/?job={{ job.name }}')" class="btn btn-primary btn-flat"> ${{ job.cost }}</a>
+
+                                        </div>
+                                        <h4 class="list-group-item-heading">{{ job.title }}</h4>
+                                        <p class="list-group-item-text">{{ job.desc }}</p>
+
+
+                                    </div>
+                                </div>
+                                <div class="list-group-separator"></div>
+
+
+
+{% endfor %}
+<a href="javascript:loadForm('/credits/newjob/')" style="float:right;"class="btn btn-primary btn-fab btn-raised mdi-action-note-add"></a>
+</div>
+        </div>
+    </div>
+</div>
+</div>

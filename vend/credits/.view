@@ -1,0 +1,103 @@
+from django.shortcuts import render
+from credits.forms import UserProfileForm, UserForm, SpendForm
+from django.contrib.auth import authenticate, login
+from django.http import HttpResponseRedirect, HttpResponse
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
+from django.contrib.auth.models import User
+from credits.models import UserProfile, PendingTransactions, Purchase
+from django.core.mail import send_mail
+import credits.models
+@login_required
+def index(request):
+    trans = PendingTransactions.objects.all().filter(purchaser=request.user)
+    items = Purchase.objects.all()
+    purchases = []
+    for purch in trans:
+        if not purch.purchased in purchases:
+            purchases.append(purch.purchased)        
+    context = {'trans': trans, 'items': items, 'purchases': purchases}
+    return render(request, '/Users/alexoro/django/vend/templates/index.html', context)
+
+def register(request):
+    registered = False
+    if request.method == 'POST':
+        user_form = UserForm(data=request.POST)
+        profile_form = UserProfileForm(data=request.POST)
+        if user_form.is_valid() and profile_form.is_valid():
+            user = user_form.save()
+            user.set_password(user.password)
+            user.save()
+            profile = profile_form.save(commit=False)
+            profile.user = user
+            profile.save()
+            registered = True
+        else:
+            print user_form.errors, profile_form.errors
+    else:
+        user_form = UserForm()
+        profile_form = UserProfileForm()
+    return render(request,
+            '/Users/alexoro/django/vend/templates/register.html',
+            {'user_form': user_form, 'profile_form': profile_form, 'registered': registered} )
+
+def user_login(request):
+    if request.method == 'POST': 
+        username = request.POST.get('username')
+        password = request.POST.get('password')  
+        user = authenticate(username=username, password=password)
+        if user:
+            if user.is_active:
+                login(request, user)
+                return HttpResponseRedirect('/credits/')
+            else:
+                return HttpResponse("Your Rango account is disabled.")
+        else:
+            print "Invalid login details: {0}, {1}".format(username, password)
+            return HttpResponse("Invalid login details supplied.")
+    else:
+        return render(request, '/Users/alexoro/django/vend/templates/login.html', {})
+
+@login_required
+def user_logout(request):
+    logout(request)
+    return HttpResponseRedirect('/credits/')
+
+@login_required
+def spend(request):
+    if request.method == 'POST':
+        form = SpendForm(request.POST)
+        if not form.data['name']:
+            return HttpResponseRedirect('/credits/spend/')
+        purch = Purchase.objects.get(pk=form.data['name'])
+        spent = request.user.profile.spend(purch.amount)
+        trans = credits.models.AddTransaction(purch,request.user,spent)
+	if spent:
+            return HttpResponseRedirect('/credits/')
+            """
+            Arbitrary code can be executed here, like:
+            1. Sending data to the vending machine to dispense shtuff
+            2. Sending an email to someone
+            3. Anything you can do in python
+            The processed/redeemed variable of an object can be modified at this point
+            for example, if the vending machine is down, the purchases can remain un redeemed 
+            layout: separate .py file for spending functions
+            i.e. socket connection to arduino, email to person
+            """
+        return render(request, '/Users/alexoro/django/vend/templates/buy.html', {'form': form, 'money': False})
+    else:
+        return render(request, '/Users/alexoro/django/vend/templates/buy.html', {'form': SpendForm, 'money': True})
+
+@login_required
+def nomoneyz(request):
+    return render(request, '/Users/alexoro/django/vend/templates/nomoneyz.html', {})
+
+@login_required
+def redeem(request):
+    trans_id = request.GET.get('c','')
+    trans = PendingTransactions.objects.get(identifier=trans_id);
+    # The same spend code can be executed here as well
+    trans.processed = True;
+    trans.save()
+    return HttpResponseRedirect('/credits/')
+    return render(request, '/Users/alexoro/django/vend/templates/redeem.html', {})

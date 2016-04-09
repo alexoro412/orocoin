@@ -1,0 +1,37 @@
+
+
+{% load staticfiles %}
+
+
+<div class="col-lg-6">
+<div class="bs-component">
+<div class="panel panel-primary">
+<div class="panel-heading">
+  <h3 class="panel-title">Your Thingz</h3>
+</div>
+<div class="panel-body">
+              <div class="list-group">
+
+
+{% for item,len in items %}
+{% if item in purchases %}
+<div class="list-group-item">
+                                  <div class="row-content">
+                                      <div class="least-content">
+                                      <a href="javascript:void(0)" class="btn btn-primary btn-flat">{{ len }} thingz</a>
+                                      </div>
+                                      <h4 class="list-group-item-heading">{{ item.name }}</h4>
+                                      <p class="list-group-item-text">{{ item.desc  }}</p>
+
+                                  </div>
+                              </div>
+                              <div class="list-group-separator"></div>
+
+
+{% endif %}
+{% endfor %}
+</div>
+          </div>
+      </div>
+  </div>
+</div>

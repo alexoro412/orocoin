@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block body_block %}
+<link href="/static/css/cyan.css" rel="stylesheet">
+<div class="bs-component">
+<div class="col-lg-6 col-lg-offset-3">
+<div class="panel panel-primary">
+<div class="panel-heading">
+<h3 class="panel-title">Login</h3>
+</div>
+<div class="panel-body" style="text-align:center;">
+
+<form id="login_form" method="post" action="/credits/login/">
+{% csrf_token %}
+Username
+<br/>
+<br/>
+<input type="text" name="username" value="" size="50" />
+<br />
+<br/>
+Password
+<br/>
+<br/>
+<input type="password" name="password" value="" size="50" />
+<br />
+<br/>
+<input type="submit" value="submit" />
+</form>
+
+</div>
+</div>
+</div>
+</div>  </div>
+{% endblock %}
+
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+Is anyone getting tired of repeatedly entering the header over and over??
+<title>VEND</title>
+</head>
+
+<body>
+<h1>Login to VEND</h1>
+
+<form id="login_form" method="post" action="/credits/login/">
+{% csrf_token %}
+Username: <input type="text" name="username" value="" size="50" />
+<br />
+Password: <input type="password" name="password" value="" size="50" />
+<br />
+
+<input type="submit" value="submit" />
+</form>
+<a href="/credits/register/">Register</a>
+</body>
+</html> -->

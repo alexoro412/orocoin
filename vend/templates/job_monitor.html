@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block body_block %}
+
+
+        <div class="col-lg-6 col-lg-offset-3">
+        <div class="bs-component">
+        <div class="panel panel-primary">
+        <div class="panel-heading">
+                <h3 class="panel-title">Monitor Job</h3>
+        </div>
+        <div class="panel-body">
+                <div class="list-group">
+									<div class="list-group-item">
+									<div class="row-action-primary">
+									                                        <i class="mdi-action-assignment"></i>
+									                                    </div>
+									<div class="row-content">
+									                                        <div class="least-content">
+									                                        <a href="javascript:void(0)" class="btn btn-primary btn-flat">{{ job.cost }}</a>
+									                                        </div>
+									                                        <h4 class="list-group-item-heading">{{ job.title }}</h4>
+																													<p class="list-group-item-text">{{ job.desc }}</p>
+																													<a href="javascript:deleteJob('{{ job.name }}')" style="float:right;"class="btn btn-primary btn-raised btn-danger">Remove</a>
+																													<!-- <a href="javascript:void(0)" style="float:right;"class="btn btn-primary btn-raised btn-warning">Archive</a> -->
+
+
+									                                    </div>
+									                                </div>
+									                                <!-- <div class="list-group-separator"></div> -->
+																								</div>
+
+																								</div>
+																								</div>
+																								</div>
+																								</div>
+
+																								<div class="col-lg-6 col-lg-offset-3">
+																				        <div class="bs-component">
+																				        <div class="panel panel-primary">
+																				        <div class="panel-heading">
+																				                <h3 class="panel-title">Submissions</h3>
+																				        </div>
+																				        <div class="panel-body">
+																				                <div class="list-group">
+{% for subm in subms %}
+<div class="list-group-item">
+<div class="row-action-primary">
+                                        <i class="mdi-action-assignment"></i>
+                                    </div>
+<div class="row-content">
+                                        <div class="least-content">
+                                        <a href="javascript:void(0)" class="btn btn-primary btn-flat">Accept</a>
+																				<a href="{{ subm.submission.url }}" style="float:right;"class="btn btn-primary btn-fab btn-raised mdi-file-cloud-download"></a>
+                                        </div>
+                                        <h4 class="list-group-item-heading">{{ subm.submitter.username }}</h4>
+
+																				<!-- <a href="{{ subm.submission.url }}">Download</a> -->
+
+                                    </div>
+                                </div>
+                                <div class="list-group-separator"></div>
+
+
+{% endfor %}
+
+
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+
+{% endblock %}

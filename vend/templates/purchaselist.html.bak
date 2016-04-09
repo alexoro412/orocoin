@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head><title>VEND</title></head>
+
+<h1> Your thingz </h1>
+<ul>
+{% for purchase in purchases %}
+<li>{{ purchase.name }}</li>
+<ol>
+{% for transa in trans %}
+{% if transa.purchased == purchase %}
+<li> {{ transa.identifier }} </li>
+{% if transa.processed %}
+Redeemed
+{% else %}
+<a href="/credits/redeem/?c={{ transa.identifier }}">Redeem</a>
+{% endif %}
+<br/>
+<br/>
+{% endif %}
+{% endfor %}
+</ol>
+{% endfor %}
+</ul>
+
+
+</html>

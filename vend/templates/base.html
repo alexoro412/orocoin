@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+
+{% load staticfiles %}
+
+<html>
+    <head lang="en">
+	<meta charset="UTF-8">
+        <title>B3CK</title>
+	<link href="/static/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/static/css/roboto.min.css" rel="stylesheet">
+        <link href="/static/css/{{ user.profile.color }}.css" rel="stylesheet">
+        <!-- <link href="/static/css/material-fullpalette.min.css" rel="stylesheet"> -->
+    <link href="/static/css/ripples.min.css" rel="stylesheet">
+</head>
+
+    <body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie != '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+var csrftoken = getCookie('csrftoken');
+
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+function sameOrigin(url) {
+    // test that a given url is a same-origin URL
+    // url could be relative or scheme relative or absolute
+    var host = document.location.host; // host + port
+    var protocol = document.location.protocol;
+    var sr_origin = '//' + host;
+    var origin = protocol + sr_origin;
+    // Allow absolute or scheme relative URLs to same origin
+    return (url == origin || url.slice(0, origin.length + 1) == origin + '/') ||
+        (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') ||
+        // or any other URL that isn't scheme relative or absolute i.e relative.
+        !(/^(\/\/|http:|https:).*/.test(url));
+}
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
+            // Send the token to same-origin, relative URLs only.
+            // Send the token only if the method warrants CSRF protection
+            // Using the CSRFToken value acquired earlier
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    }
+});
+var thing;
+function a_alert(data){
+  clearTimeout(thing);
+  if(data === 'deleted model'){
+    loadModels();
+  }
+	document.getElementById("alertalertalert").innerHTML = '<div class="col-lg-12"><div class="bs-component"><div class="alert alert-dismissable alert-success"><button type="button" class="close" onclick="javascript:closeAlert();">&times;</button><span id="alert-text"></span></div></div></div></div>';
+	document.getElementById("alert-text").innerHTML = data;
+	thing = setTimeout(function(){closeAlert()},10000);
+
+}
+
+function closeAlert(){
+
+	document.getElementById("alertalertalert").innerHTML = "";
+
+}
+
+function a_post(name,url){
+	$.post(url,{csrfmiddlewaretoken: csrftoken, name:name},function(data){a_alert(data)});
+	refreshPurchases();
+  refreshWallet();
+}
+
+function delModel(model){
+  a_post(model,'/credits/deletemodel/');
+  loadModels();
+}
+
+function deleteJob(job){
+$.post('/credits/deletejob/',{csrfmiddlewaretoken: csrftoken, name:job},function(data){
+  if(data === 'Deleted'){
+    window.location.replace('/credits/');
+  }else{
+    a_alert(data);
+  }
+});
+  //a_post(job,'/credits/deletejob/')
+}
+
+function a_post_and_close(name,url){
+	a_post(name,url);
+	closeConfirm();
+}
+
+function shadeOn(){
+  document.getElementById("shade-container").innerHTML = '<div id="shade" style="position:fixed;width:100%;height:100%;top:0%;background-color:rgba(1,1,1,0.5);z-index:19;"></div>';
+}
+function shadeOff(){
+  document.getElementById("shade-container").innerHTML = '';
+}
+
+function confirmPurchase(name, title){
+    shadeOn();
+		document.getElementById("confirm").innerHTML = '<div class="col-lg-6"><div class="panel panel-info"><div class="panel-heading"><h3 class="panel-title">Buy ' + title + '?</h3></div><div class="panel-body"><a href="javascript:a_post_and_close(' + name + ', \'/credits/spend/\')" class="btn btn-primary btn-raised">YES</a><a href="javascript:closeConfirm()" class="btn btn-warning btn-raised">NO</a></div></div></div>';
+}
+
+function closeConfirm(){
+	shadeOff();
+  refreshWallet();
+	document.getElementById("confirm").innerHTML = '';
+  refreshPurchases();
+}
+
+function refreshPurchases(){
+  $.get("/credits/purchaselist/",function(data){
+    document.getElementById("thingz-container-purchased").innerHTML = data;
+  });
+}
+refreshPurchases();
+
+function loadModels(){
+  $.get("/credits/3dmodels/",function(data){
+    document.getElementById("3d-container").innerHTML = data;
+  });
+}
+loadModels();
+function confirmOrderModel(modelname,modeltitle){
+  document.getElementById("shade-container").innerHTML = '<div id="shade" style="position:fixed;width:100%;height:100%;top:0%;background-color:rgba(1,1,1,0.5);z-index:19;"></div>';
+	document.getElementById("confirm").innerHTML = '<div class="col-lg-6"><div class="panel panel-info"><div class="panel-heading"><h3 class="panel-title">Order ' + modeltitle + '?</h3></div><div class="panel-body"><a href="javascript:orderModel(\'' + modelname + '\')" class="btn btn-primary btn-raised">YES</a><a href="javascript:closeConfirm()" class="btn btn-warning btn-raised">NO</a></div></div></div>';
+}
+
+function orderModel(modelname){
+  a_alert('ordering model');
+  closeConfirm();
+  $.get("/credits/order/?item=" + modelname, function(data){
+    clearTimeout(thing);
+    a_alert(data);
+    refreshWallet();
+  });
+}
+
+function refreshWallet(){
+  $.get("/credits/wallet/", function(data){
+    document.getElementById('wallet').innerHTML = data;
+  });
+}
+
+// function loadTransferForm(){
+//   $.get("/credits/transfer/",function(data){
+//     document.getElementById("form-popup").innerHTML = data;
+//   });
+// }
+// loadTransferForm();
+
+//
+// function loadJobForm(){
+//   $.get("/credits/newjob/",function(data){
+//     document.getElementById("form-popup").innerHTML = data;
+//   });
+// }
+// loadJobForm();
+function closeForm(){
+  document.getElementById("form-popup").innerHTML = '';
+  shadeOff();
+}
+
+function loadForm(form){
+  $.get(form,function(data){
+    shadeOn();
+    document.getElementById("form-popup").innerHTML = data;
+  });
+}
+// loadForm("/credits/newjob/");
+function loadJobList(){
+  $.get("/credits/joblist/",function(data){
+    document.getElementById("jobs").innerHTML = data;
+  });
+}
+loadJobList();
+
+function closeAll(){
+  shadeOff();
+  closeForm();
+  closeAlert();
+  closeConfirm();
+}
+
+
+</script>
+<!-- Nav bar -->
+<div class="container-alert" style="position:fixed;left:30%; z-index:10;" id="alertalertalert">
+<!--
+<div class="col-lg-12"><div class="bs-component"><div class="alert alert-dismissable alert-success"><button type="button" class="close" onclick="closeAlert()">&times;</button><span id="alert-text"></span></div></div></div>
+</div>-->
+</div>
+<div class="bs-component">
+                            <div class="navbar navbar-default">
+                                <div class="navbar-header">
+                                    <a class="navbar-brand" href="javascript:void(0)">B3CK</a>
+                                </div>
+                                <div class="navbar-collapse collapse navbar-responsive-collapse">
+                                    <ul class="nav navbar-nav">
+                                        <li class="active"><a href="/credits/">Home</a></li>
+                                        <li><a href="javascript:loadForm('/credits/upload/')">Upload 3D Things</a></li>
+                                       <li><a href="javascript:loadForm('/credits/newjob/')">Submit a Job</a></li>
+                                        <li><a href="javascript:loadForm('/credits/transfer/')">Transfer Money</a></li>
+
+                                    </ul>
+                                    <ul class="nav navbar-nav navbar-right">
+
+                                        <li><a href="javascript:void(0)" id="wallet">{{ user.profile.credits }}</a></li>
+                                        <li><a href="javascript:void(0)">{{ user.username }}</a></li>
+                                        <li><a class="mdi-social-person"></a></li>
+                                        <li><a href="/credits/logout/" class="btn-sm btn-primary">logout</a></li>
+
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+<!-- End nav bar -->
+<div id="shade-container" onclick="closeAll()"><!--
+<div id="shade" style="position:fixed;width:100%;height:100%;top:0%;background-color:rgba(1,1,1,0.5);z-index:19;">
+
+</div>-->
+</div>
+<!-- <div id="confirmWrapper" class="col-lg-12"> -->
+<div id="confirm" class="col-lg-12 col-lg-offset-3" style="position:fixed;z-index:20;">
+<!--<div class="col-lg-12">
+
+::
+position:fixed;z-index:20;width:70%;
+::
+
+<div class="panel panel-info">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Buy one meth?</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <a href="javascript:void(0)" class="btn btn-primary btn-raised">YES</a>
+				<a href="javascript:void(0)" class="btn btn-warning btn-raised">NO</a>
+                                </div>
+                            </div>
+</div>--></div>
+<!-- </div> -->
+
+
+	{% block body_block %}{% endblock %}
+
+  {% if stl_failed %}
+<script>
+  a_alert("File not recognized");
+</script>
+  {% endif %}
+    </body>
+</html>

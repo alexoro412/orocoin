@@ -1,0 +1,27 @@
+from django.conf.urls import patterns, url
+from credits import views
+
+urlpatterns = patterns('',
+	url(r'^$', views.index, name='index'),
+	url(r'^register/$', views.register, name='register'),
+	url(r'^login/$', views.user_login, name='login'),
+	url(r'^logout/$', views.user_logout, name='logout'),
+	url(r'^spend/$',views.spend, name='spend'),
+	#url(r'^nomoneyz/$',views.nomoneyz, name='nomoneyz'),
+	url(r'^redeem/$',views.redeem, name='redeem'),
+	url(r'^upload/$',views.upload, name='upload'),
+	url(r'^order/$',views.order,name='order'),
+	url(r'^transfer/$',views.transfer,name='transfer'),
+	# url(r'^delete/$',views.delete_design,name='delete'),
+	url(r'^newjob/$',views.new_job,name='newjob'),
+	url(r'^newsubmission/$',views.new_submission,name='newsubmission'),
+	url(r'^deletejob/$',views.delete_job,name='deletejob'),
+	url(r'^acceptsubmission/$',views.accept_submission,name='acceptsubmission'),
+	url(r'^purchaselist/$',views.purchase_list,name='purchaselist'),
+	url(r'^3dmodels/$',views.models_3d,name='3dmodels'),
+	url(r'^joblist/$',views.job_list,name='joblist'),
+	url(r'^wallet/$',views.wallet,name='wallet'),
+	url(r'^deletemodel/$',views.delete_design,name='deletemodel'),
+	url(r'^monitor/$',views.monitor_job,name='monitorjob'),
+	url(r'^deletejob/$', views.delete_job,name='deletejob'),
+)

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+
+<html>  
+<head>
+<link rel="stylesheet" type="text/css" href="main.css">
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/static/css/roboto.min.css" rel="stylesheet">
+        <link href="/static/css/material-fullpalette.min.css" rel="stylesheet">
+    <link href="/static/css/ripples.min.css" rel="stylesheet">
+</head>
+    
+<!--<body background="/Users/alexoro/Desktop/bg.jpg">-->
+    <body background="http://www.jsums.edu/compscience/files/2014/06/compsc.png">
+    
+    <div class="bs-component">
+                            <div class="navbar navbar-default">
+                                <div class="navbar-header">
+                                    <a class="navbar-brand" href="javascript:void(0)">AP Computer Science Principles</a>
+                                </div>
+                                <div class="navbar-collapse collapse navbar-responsive-collapse">
+                                    <ul class="nav navbar-nav">
+<!--
+                                        <li class="active"><a href="http://www.reddit.com">About</a></li>
+                                        <li><a href="http://www.reddit.com">Curriculum</a></li>
+                                        <li><a href="http://www.google.com">Why</a></li>
+                                        <li><a href="http://www.google.com">Buy Thingz</a></li>
+                                        <li><a href="http://www.google.com">Success Stories</a></li>
+-->
+
+                                    </ul>
+                                    <ul class="nav navbar-nav navbar-right">
+                                        <li><a href="https://www.collegeboard.org/">College Board</a></li>
+<!--                                        <li><a class="mdi-social-person"></a></li>-->
+
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+    
+   
+<!-- PANEL -->
+    <div class="col-lg-10 col-lg-offset-1">
+	<div class="bs-component">
+	<div class="panel panel-primary">
+	<div class="panel-heading">
+		<h3 class="panel-title">What is AP Computer Science Principles?</h3>
+	</div>
+	<div class="panel-body">
+                <div class="list-group">
+
+
+
+<div class="list-group-item">
+                                    <div class="row-content">
+<!--
+                                        <div class="least-content">
+                                        <a href="javascript:void(0)" class="btn btn-primary btn-flat">EXAMPE</a>
+                                        </div>
+-->
+                                        <h4 class="list-group-item-heading">AP Computer Science Principles is an amazing way to develop the basic frameworks of computer science and further your understanding of coding. Today our world is moving into a place where computing is becoming increasingly more relevant. This course will help stay current in our world and help provide amazing opportunities for the students futures. AP Computer Science Principles is an incredible tool that can be used in the future of the students.</h4>
+<!--                                        <p class="list-group-item-text">EXAMPEL</p>-->
+
+                                    </div>
+                                </div>
+<!--                                <div class="list-group-separator"></div>-->
+
+
+
+
+	</div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END PANEL -->
+    
+ 
+    <!-- PANEL -->
+    <div class="col-lg-10 col-lg-offset-1">
+	<div class="bs-component">
+	<div class="panel panel-primary">
+	<div class="panel-heading">
+		<h3 class="panel-title">How do you take AP Computer Sciences?</h3>
+	</div>
+	<div class="panel-body">
+                <div class="list-group">
+
+
+
+<div class="list-group-item">
+                                    <div class="row-content">
+<!--
+                                        <div class="least-content">
+                                        <a href="javascript:void(0)" class="btn btn-primary btn-flat">EXAMPE</a>
+                                        </div>
+-->
+                                        <h4 class="list-group-item-heading"><p>The flexible and rigorous AP Computer Science Principles Curriculum Framework allows schools and teachers to work from an established curriculum or develop one of their own.</p><p>
+Whether your school is interested in offering AP Computer Science Principles in 2016 or building a computer science program with an eye toward the course in the future, the initiatives and resources below can help you make an informed decision.
+                                            </p><p>If your school does not currently offer AP, please see <a href="http://apcentral.collegeboard.com/apc/html/how-to-start-an-ap-course/how-to-start-an-ap-course.html">How to Start an AP Course</a> which details the recommended steps to starting an AP program in your school. This course is new for the 2016-17 year make sure it comes to your school. It is one of the most widely growing courses. </p>
+</h4>
+<!--                                        <p class="list-group-item-text">EXAMPEL</p>-->
+
+                                    </div>
+                                </div>
+<!--                                <div class="list-group-separator"></div>-->
+
+
+
+
+	</div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END PANEL -->
+    <!-- PANEL -->
+    <div class="col-lg-10 col-lg-offset-1">
+	<div class="bs-component">
+	<div class="panel panel-primary">
+	<div class="panel-heading">
+		<h3 class="panel-title">Curriculum</h3>
+	</div>
+	<div class="panel-body">
+                <div class="list-group">
+
+
+
+<div class="list-group-item">
+                                    <div class="row-content">
+<!--
+                                        <div class="least-content">
+                                        <a href="javascript:void(0)" class="btn btn-primary btn-flat">EXAMPE</a>
+                                        </div>
+-->
+                                        <h4 class="list-group-item-heading"><h2>Digital information</h2><h4 class="list-group-item-heading">
+	What can be represented with a single bit and how do we get a single bit of information from one place to another? This unit explores the technical challenges and questions that arise from the need to represent digital information in computers and transfer it between people and computational devices. Topics include: the digital representation of information - numbers, text, images, and communication protocols</h4>
+                                            <h2>The Internet</h2><h4 class="list-group-item-heading">
+	Students continue to work together to invent solutions and protocols to many of the problems that arise in the structure and function of the Internet. Topics include the Internet Protocol, DNS, TCP/IP, cryptography, computationally hard problems, and other security and hacking concerns.</h4>
+                                            <h2>Programming</h2>
+                                        <h4 class="list-group-item-heading">Students learn the fundamentals programming constructs of JavaScript by solving problems with "turtle graphics." Then move on to programming simple event driven apps. An emphasis is placed on enabling students to solve problems and write code in teams.</h4>
+<h2>Data</h2>
+                                        <h4 class="list-group-item-heading">
+	Students continue programming and building web apps, now with a view towards data: processing it with algorithms, and the implications of storing data collected from and by others on the web. Students explore "big data" by making queries against a data analysis api.
+                                        </h4><h2>Explore and create</h2><h4 class="list-group-item-heading">
+Class time devoted to preparation and execution of the AP Performance Tasks: Explore and Create.
+                                            </h4></h4>
+<!--                                        <p class="list-group-item-text">EXAMPEL</p>-->
+
+                                    </div>
+                                </div>
+<!--                                <div class="list-group-separator"></div>-->
+
+
+
+
+	</div>
+            </div>
+        </div>
+    </div>
+</div>
+    <!-- PANEL -->
+    <div class="col-lg-10 col-lg-offset-1">
+	<div class="bs-component">
+	<div class="panel panel-primary">
+	<div class="panel-heading">
+		<h3 class="panel-title">Exam</h3>
+	</div>
+	<div class="panel-body">
+                <div class="list-group">
+
+
+
+<div class="list-group-item">
+                                    <div class="row-content">
+<!--
+                                        <div class="least-content">
+                                        <a href="javascript:void(0)" class="btn btn-primary btn-flat">EXAMPE</a>
+                                        </div>
+-->
+                                        <h4 class="list-group-item-heading">Exam
+The cumulative, written, and multiple choice exam will be administered by the college board and will demonstrate the advancement in learning and objectives of Computer Science Principles 
+</h4>
+<!--                                        <p class="list-group-item-text">EXAMPEL</p>-->
+
+                                    </div>
+                                </div>
+<!--                                <div class="list-group-separator"></div>-->
+
+
+
+
+	</div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END PANEL -->
+    <!-- PANEL -->
+<!--
+    <div class="col-lg-10 col-lg-offset-1">
+	<div class="bs-component">
+	<div class="panel panel-primary">
+	<div class="panel-heading">
+		<h3 class="panel-title">What is AP Computer Science Principles?</h3>
+	</div>
+	<div class="panel-body">
+                <div class="list-group">
+
+
+
+<div class="list-group-item">
+                                    <div class="row-content">
+                                        <div class="least-content">
+                                        <a href="javascript:void(0)" class="btn btn-primary btn-flat">EXAMPE</a>
+                                        </div>
+                                        <h4 class="list-group-item-heading">AP Computer Science Principles is an amazing way to develop the basic frameworks of computer science and further your understanding of coding. Today our world is moving into a place where computing is becoming increasingly more relevant. This course will help stay current in our world and help provide amazing opportunities for the students futures. AP Computer Science Principles is an incredible tool that can be used in the future of the students. Here the stories of success of many people across the globe:</h4>
+                                        <p class="list-group-item-text">EXAMPEL</p>
+
+                                    </div>
+                                </div>
+                                <div class="list-group-separator"></div>
+
+
+
+
+	</div>
+            </div>
+        </div>
+    </div>
+</div>
+-->
+<!-- END PANEL -->
+    
+</body>
+    
+
+
+
+
+
+
+
+
+
+
+</html>

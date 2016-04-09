@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+{% block body_block %}
+<div id="form-popup" style="z-index:21;position:fixed;" class="col-lg-6 col-lg-offset-3"></div>
+
+	<div class="col-lg-6">
+	<div class="bs-component">
+	<div class="panel panel-primary">
+	<div class="panel-heading">
+		<h3 class="panel-title">Available Thingz</h3>
+	</div>
+	<div class="panel-body">
+                <div class="list-group">
+
+{% for purch,k in items %}
+
+<div class="list-group-item">
+                                    <div class="row-content">
+                                        <div class="least-content">
+                                        <a href="javascript:confirmPurchase('{{ purch.pk }}','{{ purch.name }}')" class="btn btn-primary btn-flat">Buy ${{ purch.amount }}</a>
+                                        </div>
+                                        <h4 class="list-group-item-heading">{{ purch.name }}</h4>
+                                        <p class="list-group-item-text">{{ purch.desc  }}</p>
+
+                                    </div>
+                                </div>
+                                <div class="list-group-separator"></div>
+
+
+{% endfor %}
+
+	</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="thingz-container-purchased">
+</div>
+
+<div class="col-lg-12"></div>
+
+<div id="3d-container">
+</div>
+
+
+<div id="jobs">
+</div>
+<!-- <div id="transfer" style="position:fixed;z-index:20;" class="col-lg-12 col-lg-offset-3"></div> -->
+
+{% endblock %}
